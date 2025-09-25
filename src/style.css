@@ -9,27 +9,31 @@
 body {
   background-color: rgb(246, 246, 246);
 }
-
-/* todolist list base */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  height: 80vh;
+}
+/* todoList list base */
 #toDoList {
   display: flex;
   flex-direction: column;
-  width: 50%;
-  height: auto;
-  margin: 300px auto auto auto;
+  width: 100%;
   background-color: white;
   box-shadow: 0 4px 20px 30px rgba(0, 0, 0, 0.137);
 }
 
 ::placeholder {
-  font-family: 'inter', sans-serif;
+  font-family: "inter", sans-serif;
   font-style: italic;
   font-size: 14px;
 }
 
 /* title base */
 .title {
-  background: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -40,11 +44,13 @@ body {
 
 /* h1 text */
 .ttdl {
-  font-family: 'inter', sans-serif;
-  font-size: 15px;
-  font-weight: 100;
+  font-family: "inter", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
   font-style: normal;
   padding-top: 8px;
+  text-align: center;
+  width: 100%;
 }
 
 /* icon */
@@ -60,7 +66,6 @@ i {
 #inputList {
   justify-content: space-between;
   align-items: center;
-  background-color: #fff;
   height: 50px;
   padding-right: 10px;
   padding-left: 10px;
@@ -71,7 +76,6 @@ i {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: #fff;
   border-left: none;
   border-bottom: none;
   border-right: none;
@@ -94,7 +98,7 @@ i {
 }
 
 .submiticon {
-  padding: 2px;
+  padding: 6px;
 }
 
 .remove-edit {
@@ -114,13 +118,12 @@ i {
   border-right: none;
   border-top: 1px solid gray;
   font-size: 18px;
-  font-family: 'inter', sans-serif;
+  font-family: "inter", sans-serif;
   cursor: pointer;
 }
 
 /* task list base */
 .list {
-  background: #fff;
   display: flex;
   gap: 10px;
   align-items: center;
@@ -132,9 +135,26 @@ i {
 
 /* text */
 .tasks label {
-  font-family: 'inter', sans-serif;
+  font-family: "inter", sans-serif;
   padding-left: 10px;
   width: 100%;
+}
+
+.to-do.editing {
+  background-color: rgb(230, 230, 184); /* full width yellow */
+}
+.remove_btn {
+  display: none;
+}
+.to-do.editing .remove_btn {
+  display: inline-block; /* show delete button during edit */
+}
+.text.completed {
+  text-decoration: line-through;
+}
+.completed {
+  text-decoration: line-through;
+  color: gray;
 }
 
 /* text */
@@ -146,14 +166,9 @@ i {
   text-decoration: none;
 }
 
-/* text checkbox */
-input[type=checkbox]:checked + label {
-  text-decoration: line-through;
-}
-
 /* text */
 input {
-  font-family: 'inter', sans-serif;
+  font-family: "inter", sans-serif;
   font-size: 15px;
   font-style: italic;
   font-weight: 100;
@@ -167,21 +182,12 @@ input:focus {
 /* text */
 .text {
   height: 45px;
-  width: 95%;
   padding-left: 5px;
   border: none;
-  font-family: 'inter', sans-serif;
-  font-size: 15px;
-}
-
-.textcompleted {
-  text-decoration: line-through;
-  border: none;
-  font-size: 17px;
-  height: 45px;
-  width: 95%;
-  padding-left: 5px;
-  color: #9b9b9b;
+  background: none;
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 /* edit button */
@@ -199,8 +205,31 @@ input:focus {
   background: none;
 }
 
+/* Hide default checkbox */
 .checkbox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #888; /* grey border */
+  border-radius: 50%; /* makes it round */
+  background-color: #fff;
   cursor: pointer;
+  position: relative;
+  outline: none;
+  margin: 0;
+}
+
+.checkbox:checked::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 10px;
+  height: 10px;
+  background-color: #555; /* dark grey check */
+  border-radius: 50%; /* round dot */
 }
 
 .to-do {
@@ -211,4 +240,23 @@ input:focus {
   padding-left: 10px;
   list-style: none;
   border-bottom: 0.01px solid #d3d3d3;
+}
+
+.task-filters {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.filter-btn {
+  padding: 5px 10px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background: #eee;
+  border-radius: 5px;
+}
+.filter-btn.active {
+  background-color: #d3d3d3;
 }
